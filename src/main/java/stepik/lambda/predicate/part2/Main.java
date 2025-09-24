@@ -1,4 +1,4 @@
-package stepik.lambda.task_6_2_2;
+package stepik.lambda.predicate.part2;
 
 import java.util.*;
 import java.util.function.Predicate;

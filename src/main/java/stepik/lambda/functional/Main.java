@@ -1,4 +1,4 @@
-package stepik.lambda.task_6_1;
+package stepik.lambda.functional;
 
 import java.util.ArrayList;
 import java.util.Scanner;

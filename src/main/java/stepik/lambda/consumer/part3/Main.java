@@ -1,8 +1,7 @@
-package stepik.lambda.task_6_2_1;
+package stepik.lambda.consumer.part3;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.Predicate;
 
 class Purchase {
     private String name;
@@ -33,17 +32,24 @@ class Purchase {
         return price * count;
     }
 
+    /*Добавим только нужный сеттер*/
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return name + ";" + price + ";" + count + ";" + getCost();
     }
 
-    public static void printFilter(ArrayList<Purchase> list, Predicate<Purchase> p) {
-        for (Purchase purchase : list) {
-            if (p.test(purchase)) System.out.println(purchase);
-        }
+    public static void raisePrice(ArrayList<Purchase> list) {
+        list.forEach(p -> {
+            p.setPrice((int) (p.price + (p.getPrice() * 0.05)));
+        });
     }
 }
+
 
 public class Main {
     public static void main(String[] args) {
@@ -59,8 +65,7 @@ public class Main {
             } else continue;
             list.add(new Purchase(array[0], Integer.parseInt(array[1]), Integer.parseInt(array[2])));
         }
-        Purchase.printFilter(list, p -> p.getCost() < 200);
-        System.out.println();
-        Purchase.printFilter(list, p -> p.getName().startsWith("А"));
+        Purchase.raisePrice(list);
+        list.forEach(System.out::println);
     }
 }
