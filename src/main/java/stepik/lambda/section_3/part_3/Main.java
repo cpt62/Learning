@@ -1,4 +1,4 @@
-package stepik.lambda.function;
+package stepik.lambda.section_3.part_3;
 
 import java.util.*;
 

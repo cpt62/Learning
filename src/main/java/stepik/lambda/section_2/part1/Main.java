@@ -1,4 +1,4 @@
-package stepik.lambda.predicate.part1;
+package stepik.lambda.section_2.part1;
 
 import java.util.ArrayList;
 import java.util.Scanner;

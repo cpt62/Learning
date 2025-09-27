@@ -1,4 +1,4 @@
-package stepik.lambda.predicate.part2;
+package stepik.lambda.section_2.part2;
 
 import java.util.*;
 import java.util.function.Predicate;

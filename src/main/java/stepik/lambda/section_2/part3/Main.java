@@ -1,4 +1,4 @@
-package stepik.lambda.consumer.part3;
+package stepik.lambda.section_2.part3;
 
 import java.util.ArrayList;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package stepik.lambda.supplier.part1;
+package stepik.lambda.section_3.part_1;
 
 import java.util.function.Supplier;
 import java.util.Scanner;
