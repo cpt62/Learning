@@ -1,7 +1,10 @@
-package stepik.lambda.section_2.part3;
+package stepik.eskova.lambda.section_3.part_2;
 
-import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 class Purchase {
     private String name;
@@ -20,22 +23,8 @@ class Purchase {
         return name;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
     public int getCost() {
         return price * count;
-    }
-
-    /*Добавим только нужный сеттер*/
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     @Override
@@ -43,21 +32,19 @@ class Purchase {
         return name + ";" + price + ";" + count + ";" + getCost();
     }
 
-    public static void raisePrice(ArrayList<Purchase> list) {
-        list.forEach(p -> {
-            p.setPrice((int) (p.price + (p.getPrice() * 0.05)));
-        });
+    static Optional<Purchase> findFirst(List<Purchase> list, Predicate<Purchase> predicate) {
+        for (Purchase p : list) {
+            if (predicate.test(p)) return Optional.ofNullable(p);
+        }
+        return Optional.empty();
     }
 }
 
-
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Purchase> list = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        /* Данные поступают на вход в виде строки в формате *.csv до тех пор, пока не будет введен "end".
-        Список не предполагается пустым. */
-        String inputStr;
+        List<Purchase> list = new ArrayList<>();
+        String inputStr, lastNamed;
         while (!(inputStr = scanner.nextLine()).equals("end")) {
             String[] array;
             if (!inputStr.isEmpty()) {
@@ -65,7 +52,13 @@ public class Main {
             } else continue;
             list.add(new Purchase(array[0], Integer.parseInt(array[1]), Integer.parseInt(array[2])));
         }
-        Purchase.raisePrice(list);
-        list.forEach(System.out::println);
+        System.out.println("Первая покупка на букву М: "
+                + Purchase.findFirst(list, p ->
+                p.getName().startsWith("М")).orElse(new Purchase("Покупка не найдена", 0, 0)));
+
+        System.out.println("Первая покупка со стоимостью больше 1000: " +
+                Purchase.findFirst(list, p ->
+                        p.getCost() > 1000).orElse(new Purchase("Покупка не найдена", 0, 0)));
     }
 }
+

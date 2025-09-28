@@ -1,4 +1,4 @@
-package stepik.lambda.section_1;
+package stepik.eskova.lambda.section_1;
 
 import java.util.ArrayList;
 import java.util.Scanner;

@@ -1,9 +1,7 @@
-package stepik.lambda.section_3.part_2;
+package stepik.eskova.lambda.section_2.part1;
 
-import java.util.Optional;
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 import java.util.function.Predicate;
 
 class Purchase {
@@ -23,6 +21,14 @@ class Purchase {
         return name;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
     public int getCost() {
         return price * count;
     }
@@ -32,19 +38,20 @@ class Purchase {
         return name + ";" + price + ";" + count + ";" + getCost();
     }
 
-    static Optional<Purchase> findFirst(List<Purchase> list, Predicate<Purchase> predicate) {
-        for (Purchase p : list) {
-            if (predicate.test(p)) return Optional.ofNullable(p);
+    public static void printFilter(ArrayList<Purchase> list, Predicate<Purchase> p) {
+        for (Purchase purchase : list) {
+            if (p.test(purchase)) System.out.println(purchase);
         }
-        return Optional.empty();
     }
 }
 
 public class Main {
     public static void main(String[] args) {
+        ArrayList<Purchase> list = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        List<Purchase> list = new ArrayList<>();
-        String inputStr, lastNamed;
+        /* Данные поступают на вход в виде строки в формате *.csv до тех пор, пока не будет введен "end".
+        Список не предполагается пустым. */
+        String inputStr;
         while (!(inputStr = scanner.nextLine()).equals("end")) {
             String[] array;
             if (!inputStr.isEmpty()) {
@@ -52,13 +59,8 @@ public class Main {
             } else continue;
             list.add(new Purchase(array[0], Integer.parseInt(array[1]), Integer.parseInt(array[2])));
         }
-        System.out.println("Первая покупка на букву М: "
-                + Purchase.findFirst(list, p ->
-                p.getName().startsWith("М")).orElse(new Purchase("Покупка не найдена", 0, 0)));
-
-        System.out.println("Первая покупка со стоимостью больше 1000: " +
-                Purchase.findFirst(list, p ->
-                        p.getCost() > 1000).orElse(new Purchase("Покупка не найдена", 0, 0)));
+        Purchase.printFilter(list, p -> p.getCost() < 200);
+        System.out.println();
+        Purchase.printFilter(list, p -> p.getName().startsWith("А"));
     }
 }
-
